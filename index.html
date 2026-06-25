@@ -1,12 +1,694 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My GitHub Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acid–Base Chemistry · CHEM 201 (Organic Chemistry I)</title>
+<meta name="description" content="A student guide to acid–base chemistry for sophomore Organic Chemistry I (CHEM 201): pKa, conjugate-base stability, resonance, hybridization, and predicting equilibria.">
+<style>
+  :root{
+    --bg:#f3f0e9;
+    --surface:#ffffff;
+    --ink:#1c2630;
+    --muted:#5c6a77;
+    --faint:#8a96a2;
+    --line:#e5dfd2;
+    --line-soft:#eee9de;
+    --accent:#0f766e;
+    --accent-dark:#0a564f;
+    --accent-soft:#e2f0ee;
+    --amber:#a85a0b;
+    --amber-soft:#fcf2e1;
+    --amber-line:#f0d9b5;
+    --blue:#1e4e8c;
+    --blue-soft:#e8eff7;
+    --maxw:780px;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,"Times New Roman",serif;
+    --mono:"SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--serif);
+    font-size:18px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  sub,sup{line-height:0;font-size:.72em;}
+  a{color:var(--accent-dark);text-underline-offset:2px;text-decoration-thickness:1px;}
+  a:hover{color:var(--accent);}
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    background:linear-gradient(160deg,#0f766e 0%,#0c5d57 55%,#0a4d48 100%);
+    color:#eafaf7;
+    padding:64px 24px 56px;
+    border-bottom:4px solid var(--accent-dark);
+  }
+  .hero-inner{max-width:var(--maxw);margin:0 auto;}
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    font-weight:600;
+    color:#9fded5;
+    margin:0 0 14px;
+  }
+  .hero h1{
+    font-family:var(--sans);
+    font-weight:800;
+    font-size:clamp(2.1rem,6vw,3.2rem);
+    line-height:1.05;
+    letter-spacing:-.02em;
+    margin:0 0 16px;
+  }
+  .hero p.lede{
+    font-size:1.18rem;
+    line-height:1.5;
+    color:#d6f1ec;
+    margin:0 0 24px;
+    max-width:34em;
+  }
+  .hero-meta{
+    font-family:var(--sans);
+    font-size:.82rem;
+    color:#9fded5;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 18px;
+    border-top:1px solid rgba(255,255,255,.16);
+    padding-top:18px;
+  }
+  .hero-meta span{display:inline-flex;align-items:center;gap:6px;}
+
+  /* ---------- Layout ---------- */
+  .layout{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 24px;
+    display:grid;
+    grid-template-columns:220px minmax(0,var(--maxw));
+    gap:56px;
+    justify-content:center;
+  }
+  nav.toc{
+    position:sticky;
+    top:24px;
+    align-self:start;
+    margin-top:48px;
+    font-family:var(--sans);
+    font-size:.86rem;
+  }
+  nav.toc h2{
+    font-size:.7rem;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    color:var(--faint);
+    margin:0 0 12px;
+    font-weight:700;
+  }
+  nav.toc ol{list-style:none;margin:0;padding:0;counter-reset:toc;}
+  nav.toc li{counter-increment:toc;margin:0 0 2px;}
+  nav.toc a{
+    display:block;
+    padding:5px 10px 5px 30px;
+    position:relative;
+    color:var(--muted);
+    text-decoration:none;
+    border-radius:6px;
+    line-height:1.3;
+  }
+  nav.toc a::before{
+    content:counter(toc);
+    position:absolute;left:8px;top:5px;
+    font-size:.72rem;color:var(--faint);font-variant-numeric:tabular-nums;
+  }
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent-dark);}
+
+  main{padding:48px 0 24px;min-width:0;}
+
+  /* ---------- Sections ---------- */
+  section{margin:0 0 52px;scroll-margin-top:24px;}
+  section > h2.sec{
+    font-family:var(--sans);
+    font-size:1.5rem;
+    font-weight:750;
+    letter-spacing:-.01em;
+    margin:0 0 4px;
+    padding-bottom:0;
+    color:var(--ink);
+  }
+  .sec-num{
+    font-family:var(--sans);
+    font-size:.72rem;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:block;
+    margin:0 0 6px;
+  }
+  .sec-rule{height:3px;width:46px;background:var(--accent);border-radius:2px;margin:10px 0 22px;}
+  h3{
+    font-family:var(--sans);
+    font-size:1.06rem;
+    font-weight:700;
+    margin:30px 0 8px;
+    color:var(--ink);
+  }
+  p{margin:0 0 16px;}
+  .intro p:first-of-type{font-size:1.06rem;}
+  strong{font-weight:700;}
+  em{color:var(--accent-dark);font-style:italic;}
+
+  /* ---------- Callouts ---------- */
+  .rule{
+    background:var(--amber-soft);
+    border:1px solid var(--amber-line);
+    border-left:4px solid var(--amber);
+    border-radius:8px;
+    padding:16px 18px;
+    margin:20px 0;
+    font-size:.98rem;
+    line-height:1.55;
+  }
+  .rule .star{color:var(--amber);font-weight:700;}
+  .rule strong{color:#7a4208;}
+  .note{
+    background:var(--blue-soft);
+    border:1px solid #d3e0f1;
+    border-left:4px solid var(--blue);
+    border-radius:8px;
+    padding:14px 18px;
+    margin:20px 0;
+    font-size:.95rem;
+    color:#26425f;
+  }
+  .note strong{color:var(--blue);}
+
+  .keybox{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:6px 22px 8px;
+    margin:24px 0;
+    box-shadow:0 1px 2px rgba(28,38,48,.04);
+  }
+  .keybox ol{margin:14px 0;padding-left:22px;}
+  .keybox li{margin:0 0 12px;padding-left:4px;}
+  .keybox li::marker{color:var(--accent);font-weight:700;font-family:var(--sans);}
+
+  /* ---------- Reaction schemes ---------- */
+  .scheme{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 22px 16px;
+    margin:20px 0;
+  }
+  .rxn{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:flex-start;
+    gap:6px 14px;
+    font-size:1.02rem;
+  }
+  .rxn .sp{display:inline-flex;flex-direction:column;align-items:center;gap:3px;}
+  .rxn .formula{font-weight:600;white-space:nowrap;}
+  .rxn .lbl{
+    font-family:var(--sans);
+    font-size:.66rem;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--faint);
+    text-align:center;
+    line-height:1.2;
+  }
+  .rxn .op{font-size:1.1rem;color:var(--muted);padding-top:1px;}
+  .rxn .eq{font-size:1.25rem;color:var(--accent);padding:0 2px;}
+  .rxn-note{
+    font-size:.92rem;
+    color:var(--muted);
+    margin:14px 0 0;
+    padding-top:12px;
+    border-top:1px dashed var(--line);
+  }
+  .rxn-note strong{color:var(--accent-dark);}
+
+  /* ---------- Tables ---------- */
+  .tablewrap{overflow-x:auto;margin:20px 0;border:1px solid var(--line);border-radius:10px;}
+  table{border-collapse:collapse;width:100%;font-size:.92rem;background:var(--surface);}
+  caption{
+    caption-side:top;text-align:left;font-family:var(--sans);font-size:.82rem;
+    color:var(--muted);padding:12px 14px 0;
+  }
+  th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top;}
+  thead th{
+    font-family:var(--sans);font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--muted);background:#faf8f3;font-weight:700;border-bottom:1.5px solid var(--line);
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:.88rem;}
+  .strong-acid{color:var(--accent-dark);font-weight:700;}
+  .trend{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin:10px 2px 0;display:flex;flex-wrap:wrap;gap:6px 24px;}
+
+  code{
+    font-family:var(--mono);font-size:.86em;background:#f0ede5;
+    padding:1px 5px;border-radius:4px;border:1px solid var(--line-soft);
+  }
+
+  .factor-grid{display:grid;gap:14px;margin:22px 0;}
+  .factor{
+    background:var(--surface);border:1px solid var(--line);border-radius:10px;
+    padding:16px 18px;display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;
+  }
+  .factor .n{
+    font-family:var(--sans);font-weight:800;font-size:1.05rem;color:#fff;
+    background:var(--accent);width:30px;height:30px;border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .factor h4{font-family:var(--sans);font-size:1rem;margin:2px 0 4px;font-weight:700;}
+  .factor p{margin:0;font-size:.95rem;color:var(--muted);}
+  .factor p strong{color:var(--ink);}
+
+  /* ---------- Logic chain ---------- */
+  .chain{
+    background:linear-gradient(160deg,#11302e,#0c2422);
+    color:#d6f1ec;border-radius:12px;padding:26px 24px;margin:22px 0;
+    font-family:var(--sans);
+  }
+  .chain .row{
+    display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;
+    font-weight:600;font-size:1rem;justify-content:center;text-align:center;
+  }
+  .chain .pill{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);
+    padding:7px 14px;border-radius:999px;white-space:nowrap;}
+  .chain .arrow{color:#7fd3c8;font-size:1.1rem;}
+  .chain p{margin:18px 0 0;font-size:.92rem;color:#9fded5;text-align:center;font-family:var(--serif);}
+  .chain .eqn{font-family:var(--mono);font-size:.9rem;color:#bfeee6;}
+
+  footer{
+    border-top:1px solid var(--line);
+    background:var(--surface);
+    padding:30px 24px 44px;
+    margin-top:24px;
+  }
+  .footer-inner{
+    max-width:var(--maxw);margin:0 auto;font-family:var(--sans);
+    font-size:.85rem;color:var(--muted);display:flex;flex-wrap:wrap;
+    gap:8px 16px;justify-content:space-between;align-items:center;
+  }
+  .footer-inner .tag{color:var(--faint);}
+
+  @media (max-width:920px){
+    .layout{grid-template-columns:1fr;gap:0;}
+    nav.toc{display:none;}
+    main{padding:36px 0 12px;}
+  }
+  @media (max-width:520px){
+    body{font-size:17px;}
+    header.hero{padding:48px 20px 40px;}
+    .layout{padding:0 18px;}
+    .factor{grid-template-columns:1fr;}
+    .factor .n{margin-bottom:-4px;}
+  }
+</style>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <p>Saved for CHEM 201 Demonstration</p>
+
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">CHEM 201 · Organic Chemistry I</p>
+    <h1>Acid–Base Chemistry</h1>
+    <p class="lede">Almost every reaction you meet this semester opens with a proton moving. Master acid–base logic and you can predict where an equilibrium sits — and which way a reaction wants to go — often without looking anything up.</p>
+    <div class="hero-meta">
+      <span>⚗️ Sophomore Organic Chemistry I</span>
+      <span>📈 pK<sub>a</sub>, stability &amp; equilibrium</span>
+      <span>✍️ Built from lecture notes</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="toc" aria-label="Contents">
+    <h2>On this page</h2>
+    <ol>
+      <li><a href="#core">The core logic</a></li>
+      <li><a href="#pka">Acid strength &amp; pK<sub>a</sub></a></li>
+      <li><a href="#table">The pK<sub>a</sub> table</a></li>
+      <li><a href="#questions">Two exam questions</a></li>
+      <li><a href="#stability">Conjugate-base stability</a></li>
+      <li><a href="#compare">Worked comparisons</a></li>
+      <li><a href="#resonance">Resonance effects</a></li>
+      <li><a href="#hybridization">Hybridization</a></li>
+      <li><a href="#keq">Calculating K<sub>eq</sub></a></li>
+      <li><a href="#functional-groups">Functional groups</a></li>
+      <li><a href="#imf">Intermolecular forces</a></li>
+      <li><a href="#cheatsheet">Quick reference</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <section id="core" class="intro">
+      <span class="sec-num">Start here</span>
+      <h2 class="sec">The core logic</h2>
+      <div class="sec-rule"></div>
+      <p>Organic acid–base chemistry is built on a surprisingly small set of rules. Internalize these five and the rest of the topic becomes pattern-matching.</p>
+
+      <div class="keybox">
+        <ol>
+          <li><strong>Reactions favor the weaker acid.</strong> An acid–base equilibrium always lies toward the side with the <em>weaker acid</em> — the one with the <em>larger</em> pK<sub>a</sub>. Equivalently, it favors the <em>more stable</em> (weaker) base.</li>
+          <li><strong>pK<sub>a</sub> = −log K<sub>a</sub>.</strong> A <em>smaller</em> pK<sub>a</sub> means a <em>stronger</em> acid; a larger pK<sub>a</sub> means a weaker acid.</li>
+          <li><strong>Stronger acid ⇒ more stable conjugate base.</strong> To rank acids without a table, rank the stability of the anions they leave behind.</li>
+          <li><strong>Conjugate-base stability has a priority order:</strong> Atom (size &amp; electronegativity) → Resonance → Inductive / proximity → Hybridization.</li>
+          <li><strong>Two skills are tested:</strong> deciding <em>which way an equilibrium lies</em>, and deciding <em>which of two compounds is the stronger acid</em>.</li>
+        </ol>
+      </div>
+
+      <p>A quick illustration — deprotonating methanol with sodium hydride:</p>
+      <div class="scheme">
+        <div class="rxn">
+          <span class="sp"><span class="formula">CH<sub>3</sub>–O–H</span><span class="lbl">acid · pK<sub>a</sub> 16</span></span>
+          <span class="op">+</span>
+          <span class="sp"><span class="formula">Na<sup>+</sup> H<sup>−</sup></span><span class="lbl">base</span></span>
+          <span class="eq">⇌</span>
+          <span class="sp"><span class="formula">CH<sub>3</sub>–O<sup>−</sup> Na<sup>+</sup></span><span class="lbl">conj. base</span></span>
+          <span class="op">+</span>
+          <span class="sp"><span class="formula">H<sub>2</sub> ↑</span><span class="lbl">conj. acid · pK<sub>a</sub> 35</span></span>
+        </div>
+        <p class="rxn-note">The reaction <strong>favors the right</strong>: it forms H<sub>2</sub>, the weaker acid (pK<sub>a</sub> 35 &gt; 16). Hydride is a strong enough base to pull the O–H proton off, and the H<sub>2</sub> gas bubbling away drives it further.</p>
+      </div>
+    </section>
+
+    <section id="pka">
+      <span class="sec-num">Section 01</span>
+      <h2 class="sec">Acid strength and pK<sub>a</sub></h2>
+      <div class="sec-rule"></div>
+      <p>Any acid H–A ionizes in water by handing a proton to a solvent molecule:</p>
+      <div class="scheme">
+        <div class="rxn">
+          <span class="sp"><span class="formula">H–A</span><span class="lbl">acid</span></span>
+          <span class="op">+</span>
+          <span class="sp"><span class="formula">H<sub>2</sub>O</span><span class="lbl">base</span></span>
+          <span class="eq">⇌</span>
+          <span class="sp"><span class="formula">A<sup>−</sup></span><span class="lbl">conj. base</span></span>
+          <span class="op">+</span>
+          <span class="sp"><span class="formula">H<sub>3</sub>O<sup>+</sup></span><span class="lbl">conj. acid</span></span>
+        </div>
+      </div>
+      <p>Because water is the solvent its concentration is essentially constant, so the equilibrium constant collapses into the <strong>acid dissociation constant</strong>:</p>
+      <div class="note">
+        K<sub>a</sub> = [H<sub>3</sub>O<sup>+</sup>][A<sup>−</sup>] / [HA] &nbsp;&nbsp;and&nbsp;&nbsp; <strong>pK<sub>a</sub> = −log K<sub>a</sub></strong>
+      </div>
+      <p>The farther to the right that ionization lies, the more H<sub>3</sub>O<sup>+</sup> is produced, the larger K<sub>a</sub>, and the <strong>stronger the acid</strong>.</p>
+      <div class="rule"><span class="star">★</span> <strong>Smaller pK<sub>a</sub> ⇒ stronger acid.</strong> Larger pK<sub>a</sub> ⇒ weaker acid. Each whole pK<sub>a</sub> unit is a factor of ten in acidity.</div>
+    </section>
+
+    <section id="table">
+      <span class="sec-num">Section 02</span>
+      <h2 class="sec">The pK<sub>a</sub> table you should know</h2>
+      <div class="sec-rule"></div>
+      <p>You don't need to memorize hundreds of values — you need a mental ladder of <em>anchor</em> compounds. The acidic proton is shown in <strong>bold</strong>.</p>
+      <div class="tablewrap">
+        <table>
+          <caption>Table 2.1 — Selected pK<sub>a</sub> values (anchor compounds)</caption>
+          <thead>
+            <tr><th>Acid (acidic H in bold)</th><th class="num">pK<sub>a</sub></th><th>Conjugate base</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>H</strong>–Cl &nbsp;<span style="color:var(--faint)">(hydrochloric acid)</span></td><td class="num">−7</td><td>Cl<sup>−</sup></td></tr>
+            <tr><td>CH<sub>3</sub>CO<sub>2</sub>–<strong>H</strong> &nbsp;<span style="color:var(--faint)">(acetic acid)</span></td><td class="num">4.8</td><td>CH<sub>3</sub>CO<sub>2</sub><sup>−</sup></td></tr>
+            <tr><td>HO–<strong>H</strong> &nbsp;<span style="color:var(--faint)">(water)</span></td><td class="num">15.7</td><td>HO<sup>−</sup></td></tr>
+            <tr><td>CH<sub>3</sub>CH<sub>2</sub>O–<strong>H</strong> &nbsp;<span style="color:var(--faint)">(ethanol)</span></td><td class="num">16</td><td>CH<sub>3</sub>CH<sub>2</sub>O<sup>−</sup></td></tr>
+            <tr><td>HC≡C–<strong>H</strong> &nbsp;<span style="color:var(--faint)">(terminal alkyne)</span></td><td class="num">25</td><td>HC≡C<sup>−</sup></td></tr>
+            <tr><td><strong>H</strong>–H &nbsp;<span style="color:var(--faint)">(hydrogen)</span></td><td class="num">35</td><td>H<sup>−</sup></td></tr>
+            <tr><td>H<sub>2</sub>N–<strong>H</strong> &nbsp;<span style="color:var(--faint)">(ammonia)</span></td><td class="num">38</td><td>H<sub>2</sub>N<sup>−</sup></td></tr>
+            <tr><td>CH<sub>2</sub>=C<strong>H<sub>2</sub></strong> &nbsp;<span style="color:var(--faint)">(ethylene)</span></td><td class="num">44</td><td>CH<sub>2</sub>=CH<sup>−</sup></td></tr>
+            <tr><td>CH<sub>3</sub>–<strong>H</strong> &nbsp;<span style="color:var(--faint)">(methane)</span></td><td class="num">50</td><td>CH<sub>3</sub><sup>−</sup></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="trend">
+        <span>↑ Up the table = increasing acidity (HCl strongest)</span>
+        <span>↓ Down the table = increasingly basic conjugate base (CH<sub>3</sub><sup>−</sup> strongest base)</span>
+      </div>
+      <div class="note">A carboxylic acid can be written three equivalent ways: <code>CH₃CO₂H ≡ CH₃COOH ≡ CH₃–C(=O)–O–H</code>. Notice the jump from an alcohol (pK<sub>a</sub> ≈ 16) to a carboxylic acid (pK<sub>a</sub> ≈ 4.8) — about eleven orders of magnitude, all thanks to resonance in the conjugate base.</div>
+    </section>
+
+    <section id="questions">
+      <span class="sec-num">Section 03</span>
+      <h2 class="sec">The two exam questions</h2>
+      <div class="sec-rule"></div>
+      <p>Nearly every acid–base problem is one of these two questions wearing a costume.</p>
+
+      <h3>1 · Which way does the equilibrium lie?</h3>
+      <p><strong>If you have pK<sub>a</sub> values:</strong> the reaction favors the side with the <em>weaker acid</em> (the larger pK<sub>a</sub>).<br>
+      <strong>If you don't:</strong> compare the structures of the two bases — the reaction favors the <em>weaker, more stable</em> base.</p>
+
+      <div class="scheme">
+        <div class="rxn">
+          <span class="sp"><span class="formula">CH<sub>3</sub>CH<sub>2</sub>O–H</span><span class="lbl">acid · pK<sub>a</sub> 16</span></span>
+          <span class="op">+</span>
+          <span class="sp"><span class="formula">:NH<sub>2</sub><sup>−</sup></span><span class="lbl">base</span></span>
+          <span class="eq">⇌</span>
+          <span class="sp"><span class="formula">CH<sub>3</sub>CH<sub>2</sub>O:<sup>−</sup></span><span class="lbl">conj. base</span></span>
+          <span class="op">+</span>
+          <span class="sp"><span class="formula">NH<sub>3</sub></span><span class="lbl">conj. acid · pK<sub>a</sub> 38</span></span>
+        </div>
+        <p class="rxn-note">Favors the <strong>right</strong> — NH<sub>3</sub> (pK<sub>a</sub> 38) is the weaker acid. Amide ion is a strong enough base to fully deprotonate ethanol.</p>
+      </div>
+
+      <h3>2 · Which compound is the stronger acid?</h3>
+      <p><strong>If you have pK<sub>a</sub>:</strong> smaller pK<sub>a</sub> wins.<br>
+      <strong>If you don't:</strong> the acid with the <em>more stable conjugate base</em> is stronger. That single idea — conjugate-base stability — is what the rest of this page is about.</p>
+    </section>
+
+    <section id="stability">
+      <span class="sec-num">Section 04</span>
+      <h2 class="sec">Ranking conjugate-base stability</h2>
+      <div class="sec-rule"></div>
+      <p>When you remove a proton from H–A you create the anion A<sup>−</sup>. <strong>How stable that anion is decides how strong the acid was.</strong> Stability is governed by four factors, applied <em>in priority order</em>:</p>
+
+      <div class="rule"><span class="star">★</span> Sometimes remembered as <strong>ARIO</strong> — <strong>A</strong>tom, <strong>R</strong>esonance, <strong>I</strong>nductive, <strong>O</strong>rbital (hybridization). Check them top to bottom; the first factor that differs usually decides the winner.</div>
+
+      <div class="factor-grid">
+        <div class="factor">
+          <div class="n">A</div>
+          <div>
+            <h4>Atom carrying the charge</h4>
+            <p>Two sub-rules. <strong>Down a column</strong> (different rows of the periodic table), <strong>bigger atom = more stable</strong> anion — charge spreads over a larger volume. <strong>Across a row</strong>, the <strong>more electronegative atom = more stable</strong> anion. So I<sup>−</sup> beats Cl<sup>−</sup> (size), and CH<sub>3</sub>O<sup>−</sup> beats CH<sub>3</sub>NH<sup>−</sup> (electronegativity).</p>
+          </div>
+        </div>
+        <div class="factor">
+          <div class="n">R</div>
+          <div>
+            <h4>Resonance</h4>
+            <p><strong>More resonance structures = more stable.</strong> Spreading the negative charge over several atoms is far more stabilizing than parking it on one. This is why acetate (charge over two oxygens) is much more stable than methoxide (charge on one).</p>
+          </div>
+        </div>
+        <div class="factor">
+          <div class="n">I</div>
+          <div>
+            <h4>Inductive effect &amp; proximity</h4>
+            <p>Electronegative atoms pull electron density through the σ-bonds, draining charge away from the anion. <strong>More electronegative neighbors</strong>, <strong>more of them</strong>, and <strong>closer to the charge</strong> all increase stability. Fluorine helps more than bromine; two fluorines beat one; a fluorine one carbon away beats one three carbons away.</p>
+          </div>
+        </div>
+        <div class="factor">
+          <div class="n">O</div>
+          <div>
+            <h4>Orbital / hybridization</h4>
+            <p>A lone pair in a <strong>smaller orbital</strong> sits closer to the nucleus and is held more tightly, so it is more stable. s-character shrinks the orbital: <strong>sp &lt; sp² &lt; sp³</strong> in size, so an sp lone pair is the most stabilized. That makes a terminal alkyne C–H (pK<sub>a</sub> 25) far more acidic than an alkane C–H (pK<sub>a</sub> 50).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rule"><span class="star">★</span> <strong>More stable conjugate base ⇒ stronger acid</strong> — and that same stability makes the base <em>weaker</em> (less reactive). Stability and basicity always pull in opposite directions.</div>
+    </section>
+
+    <section id="compare">
+      <span class="sec-num">Section 05</span>
+      <h2 class="sec">Worked comparisons — "circle the stronger acid"</h2>
+      <div class="sec-rule"></div>
+      <p>Each row isolates a single factor so you can see it operate. The <span class="strong-acid">stronger acid</span> is highlighted.</p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th>Factor</th><th>Comparison</th><th>Why the winner wins</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Atom — size</td><td><span class="strong-acid">H–I</span> &nbsp;vs&nbsp; H–Cl</td><td>I<sup>−</sup> is larger than Cl<sup>−</sup>, so it holds the charge more comfortably.</td></tr>
+            <tr><td>Atom — size</td><td><span class="strong-acid">CH<sub>3</sub>S–H</span> &nbsp;vs&nbsp; CH<sub>3</sub>O–H</td><td>S sits below O; CH<sub>3</sub>S<sup>−</sup> is larger and more stable than CH<sub>3</sub>O<sup>−</sup>.</td></tr>
+            <tr><td>Atom — electronegativity</td><td><span class="strong-acid">CH<sub>3</sub>O–H</span> &nbsp;vs&nbsp; CH<sub>3</sub>NH<sub>2</sub></td><td>O is more electronegative than N, so CH<sub>3</sub>O<sup>−</sup> is the more stable anion.</td></tr>
+            <tr><td>Inductive — proximity</td><td>F–CH<sub>2</sub>CH<sub>2</sub>–OH &nbsp;vs&nbsp; <span class="strong-acid">CH<sub>3</sub>–CHF–OH</span></td><td>The F is one carbon closer to the O<sup>−</sup>, so it withdraws charge more effectively.</td></tr>
+            <tr><td>Inductive — number</td><td>F–CH<sub>2</sub>–OH &nbsp;vs&nbsp; <span class="strong-acid">F<sub>2</sub>CH–OH</span></td><td>Two fluorines drain more electron density than one.</td></tr>
+            <tr><td>Inductive — relative EN</td><td>Br–CH<sub>2</sub>–OH &nbsp;vs&nbsp; <span class="strong-acid">F–CH<sub>2</sub>–OH</span></td><td>F is more electronegative than Br, so it pulls harder.</td></tr>
+            <tr><td>Hybridization</td><td><span class="strong-acid">CH<sub>3</sub>–C≡C–H</span> (sp) &nbsp;vs&nbsp; CH<sub>2</sub>=CH<sub>2</sub> (sp²)</td><td>The sp lone pair lives in the smallest orbital ⇒ most stable anion.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="resonance">
+      <span class="sec-num">Section 06</span>
+      <h2 class="sec">Resonance effects, in depth</h2>
+      <div class="sec-rule"></div>
+      <p>Resonance is usually the most dramatic stabilizer on the list. Two classic comparisons:</p>
+
+      <h3>Ethanol vs. acetic acid</h3>
+      <div class="scheme">
+        <div class="rxn">
+          <span class="sp"><span class="formula">CH<sub>3</sub>CH<sub>2</sub>–O–H</span><span class="lbl">ethanol · pK<sub>a</sub> 16</span></span>
+          <span class="eq">vs</span>
+          <span class="sp"><span class="formula">CH<sub>3</sub>–C(=O)–O–H</span><span class="lbl">acetic acid · pK<sub>a</sub> 4.8 · stronger</span></span>
+        </div>
+        <p class="rxn-note">Ethoxide (CH<sub>3</sub>CH<sub>2</sub>O<sup>−</sup>) traps its charge on a single oxygen. <strong>Acetate</strong> delocalizes the charge equally over <em>two</em> oxygens (CH<sub>3</sub>CO<sub>2</sub><sup>−</sup> ⇌ CH<sub>3</sub>C(O<sup>−</sup>)=O), so it is far more stable — and acetic acid is ~11 pK<sub>a</sub> units stronger.</p>
+      </div>
+
+      <h3>Propane vs. propene</h3>
+      <div class="scheme">
+        <div class="rxn">
+          <span class="sp"><span class="formula">CH<sub>3</sub>CH<sub>2</sub>CH<sub>3</sub></span><span class="lbl">propane</span></span>
+          <span class="eq">vs</span>
+          <span class="sp"><span class="formula">CH<sub>2</sub>=CH–CH<sub>3</sub></span><span class="lbl">propene · stronger (allylic C–H)</span></span>
+        </div>
+        <p class="rxn-note">Remove an <strong>allylic</strong> proton from propene and the resulting allyl anion is resonance-delocalized (CH<sub>2</sub>=CH–CH<sub>2</sub><sup>−</sup> ⇌ <sup>−</sup>CH<sub>2</sub>–CH=CH<sub>2</sub>). The propyl anion from propane has no such escape, so propene is the stronger acid.</p>
+      </div>
+    </section>
+
+    <section id="hybridization">
+      <span class="sec-num">Section 07</span>
+      <h2 class="sec">Hybridization — and the basicity flip</h2>
+      <div class="sec-rule"></div>
+      <p>For <strong>C–H acidity</strong>, more s-character means a smaller orbital, a more stable anion, and a more acidic proton:</p>
+      <div class="scheme">
+        <div class="rxn" style="justify-content:center;font-size:1.1rem;">
+          <span class="sp"><span class="formula">H–C≡C–H</span><span class="lbl">sp · most acidic</span></span>
+          <span class="op">&gt;</span>
+          <span class="sp"><span class="formula">H<sub>2</sub>C=CH<sub>2</sub></span><span class="lbl">sp²</span></span>
+          <span class="op">&gt;</span>
+          <span class="sp"><span class="formula">CH<sub>3</sub>–CH<sub>3</sub></span><span class="lbl">sp³ · least acidic</span></span>
+        </div>
+      </div>
+
+      <h3>For bases, the trend reverses</h3>
+      <p>A lone pair that is held tightly (lots of s-character) is stable — and a stable lone pair is a <em>weak</em> base. So among nitrogen bases, the <strong>sp³</strong> lone pair is the stronger base, the sp lone pair the weakest.</p>
+      <div class="rule"><span class="star">★</span> <strong>Only electrons in p orbitals can be delocalized by resonance.</strong> A lone pair locked in an sp² orbital that points away from the π-system stays put — and a localized lone pair is a better base.</div>
+
+      <h3>Pyridine vs. DMF</h3>
+      <p><strong>Pyridine is the stronger base.</strong> Its nitrogen lone pair sits in an sp² orbital in the plane of the ring, localized and available. In <strong>DMF</strong> [(CH<sub>3</sub>)<sub>2</sub>N–CHO] the nitrogen lone pair delocalizes into the carbonyl (R<sub>2</sub>N–C(=O) ⇌ R<sub>2</sub>N<sup>+</sup>=C–O<sup>−</sup>), spreading out the electrons.</p>
+      <div class="note"><strong>Spreading out electrons ⇒ more stable ⇒ less basic.</strong> The same delocalization that stabilizes an anion also tames a lone pair's reactivity.</div>
+    </section>
+
+    <section id="keq">
+      <span class="sec-num">Section 08</span>
+      <h2 class="sec">Putting a number on it: K<sub>eq</sub></h2>
+      <div class="sec-rule"></div>
+      <p>For any acid–base reaction <strong>HA + B<sup>−</sup> ⇌ HB + A<sup>−</sup></strong>, the equilibrium constant is just a ratio of the two acids' K<sub>a</sub> values:</p>
+      <div class="note" style="text-align:center;font-size:1.02rem;">
+        K<sub>eq</sub> = K<sub>a</sub>(left acid) / K<sub>a</sub>(right acid) = 10<sup>(pK<sub>a,right</sub> − pK<sub>a,left</sub>)</sup>
+      </div>
+
+      <h3>Can bicarbonate deprotonate phenol?</h3>
+      <div class="scheme">
+        <div class="rxn">
+          <span class="sp"><span class="formula">HCO<sub>3</sub><sup>−</sup></span><span class="lbl">base</span></span>
+          <span class="op">+</span>
+          <span class="sp"><span class="formula">C<sub>6</sub>H<sub>5</sub>–O–H</span><span class="lbl">phenol · pK<sub>a</sub> 10</span></span>
+          <span class="eq">⇌</span>
+          <span class="sp"><span class="formula">H<sub>2</sub>CO<sub>3</sub></span><span class="lbl">conj. acid · pK<sub>a</sub> 6.4</span></span>
+          <span class="op">+</span>
+          <span class="sp"><span class="formula">C<sub>6</sub>H<sub>5</sub>–O<sup>−</sup></span><span class="lbl">phenoxide</span></span>
+        </div>
+        <p class="rxn-note">K<sub>eq</sub> = 10<sup>(−10)</sup> / 10<sup>(−6.4)</sup> = 10<sup>−3.6</sup> ≈ 2.5 × 10<sup>−4</sup>. Since <strong>K<sub>eq</sub> &lt; 1, the equilibrium lies left.</strong></p>
+      </div>
+      <div class="rule"><span class="star">★</span> <strong>Answer: No.</strong> Bicarbonate can't appreciably deprotonate phenol — doing so would have to form the <em>stronger</em> acid H<sub>2</sub>CO<sub>3</sub>, which the equilibrium resists. (This is exactly why carboxylic acids, but not phenols, dissolve in aqueous bicarbonate — a classic separation trick.)</div>
+    </section>
+
+    <section id="functional-groups">
+      <span class="sec-num">Section 09</span>
+      <h2 class="sec">Functional groups to recognize</h2>
+      <div class="sec-rule"></div>
+      <p>Acidity and basicity live on functional groups, so fluent recognition is half the battle. The carbonyl family in particular shows up everywhere.</p>
+
+      <h3>The carbonyl family</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Type</th><th>General structure</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Aldehyde</td><td>R–C(=O)–H</td><td>CH<sub>3</sub>CHO (acetaldehyde)</td></tr>
+            <tr><td>Ketone</td><td>R–C(=O)–R</td><td>(CH<sub>3</sub>)<sub>2</sub>C=O (acetone)</td></tr>
+            <tr><td>Carboxylic acid</td><td>R–C(=O)–OH</td><td>CH<sub>3</sub>COOH (acetic acid)</td></tr>
+            <tr><td>Ester</td><td>R–C(=O)–O–R</td><td>CH<sub>3</sub>C(=O)OCH<sub>3</sub></td></tr>
+            <tr><td>Amide</td><td>R–C(=O)–N(H/R)<sub>2</sub></td><td>CH<sub>3</sub>C(=O)NH<sub>2</sub></td></tr>
+            <tr><td>Acid chloride</td><td>R–C(=O)–Cl</td><td>CH<sub>3</sub>C(=O)Cl</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>The broader chart</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Group</th><th>Structure</th><th>Group</th><th>Structure</th></tr></thead>
+          <tbody>
+            <tr><td>Alkane <span style="color:var(--faint)">(not a func. group)</span></td><td>R–H</td><td>Alcohol</td><td>R–OH</td></tr>
+            <tr><td>Alkene</td><td>R<sub>2</sub>C=CR<sub>2</sub></td><td>Ether</td><td>R–O–R</td></tr>
+            <tr><td>Alkyne</td><td>R–C≡C–R</td><td>Amine</td><td>R–N(H/R)<sub>2</sub></td></tr>
+            <tr><td>Arene (aryl)</td><td>C<sub>6</sub>H<sub>5</sub>–</td><td>Nitrile</td><td>R–C≡N</td></tr>
+            <tr><td>Alkyl halide</td><td>R–X</td><td>Thiol</td><td>R–S–H</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="imf">
+      <span class="sec-num">Section 10</span>
+      <h2 class="sec">Intermolecular forces &amp; boiling point</h2>
+      <div class="sec-rule"></div>
+      <p>A short companion topic. The strength of the forces <em>between</em> molecules sets physical properties like boiling point.</p>
+      <ul>
+        <li><strong>Van der Waals (London dispersion)</strong> forces act between temporary, induced dipoles — fleeting δ<sup>+</sup>/δ<sup>−</sup> regions in any molecule.</li>
+        <li>Larger, longer molecules (e.g. pentane) have more surface contact, so their dispersion forces are stronger.</li>
+        <li><strong>Hydrogen bonding</strong> — an H attached to N, O, or F interacting with another N/O/F lone pair — is the strongest of the three.</li>
+      </ul>
+      <div class="note" style="text-align:center;font-family:var(--sans);font-size:.95rem;">
+        van der Waals &nbsp;&lt;&nbsp; dipole–dipole &nbsp;&lt;&nbsp; hydrogen bonding<br>
+        <span style="color:var(--faint);font-size:.85rem;">increasing IMF strength → increasing boiling point</span>
+      </div>
+    </section>
+
+    <section id="cheatsheet">
+      <span class="sec-num">Wrap-up</span>
+      <h2 class="sec">Quick reference — the logic chain</h2>
+      <div class="sec-rule"></div>
+      <p>Everything on this page is one connected idea. Read it left to right:</p>
+      <div class="chain">
+        <div class="row">
+          <span class="pill">small pK<sub>a</sub></span><span class="arrow">⇔</span>
+          <span class="pill">strong acid</span><span class="arrow">⇔</span>
+          <span class="pill">stable conjugate base</span><span class="arrow">⇔</span>
+          <span class="pill">weak base</span>
+        </div>
+        <p>Conjugate-base stability is set, in order, by:<br>
+        <strong>atom (size, electronegativity) → resonance → inductive / proximity → hybridization</strong></p>
+        <p style="margin-top:14px;">An equilibrium always shifts toward the <strong>weaker acid</strong> (larger pK<sub>a</sub>) / more stable base.<br>
+        <span class="eqn">K<sub>eq</sub> = K<sub>a</sub>(left) / K<sub>a</sub>(right) = 10<sup>(pK<sub>a,right</sub> − pK<sub>a,left</sub>)</sup></span></p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span>Acid–Base Chemistry · CHEM 201 (Organic Chemistry I)</span>
+    <span class="tag">Saved for CHEM 201 Demonstration</span>
+  </div>
+</footer>
+
 </body>
 </html>
